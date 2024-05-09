@@ -11,13 +11,13 @@
 
 #include "impressionistDoc.h"
 #include "impressionistUI.h"
-#include "triangleBrush.h"
+
 
 #include "impBrush.h"
-
 // Include individual brush headers here.
 //�u���V�ǉ�
 #include "pointBrush.h"
+#include "triangleBrush.h"
 
 
 #define DESTROY(p)	{  if ((p)!=NULL) {delete [] p; p=NULL; } }
