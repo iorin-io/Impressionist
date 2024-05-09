@@ -51,7 +51,7 @@
     <ClInclude Include="lineBrush.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="scatterdPointBrush.h">
+    <ClInclude Include="scatteredPointBrush.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

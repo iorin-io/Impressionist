@@ -95,7 +95,7 @@
     <ClInclude Include="originalView.h" />
     <ClInclude Include="paintView.h" />
     <ClInclude Include="pointBrush.h" />
-    <ClInclude Include="scatterdPointBrush.h" />
+    <ClInclude Include="scatteredPointBrush.h" />
     <ClInclude Include="triangleBrush.h" />
   </ItemGroup>
   <ItemGroup>
