@@ -19,6 +19,7 @@
 #include "pointBrush.h"
 #include "triangleBrush.h"
 #include "circleBrush.h"
+#include "lineBrush.h"
 
 
 #define DESTROY(p)	{  if ((p)!=NULL) {delete [] p; p=NULL; } }
