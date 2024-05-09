@@ -42,6 +42,9 @@
     <ClInclude Include="pointBrush.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="triangleBrush.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="bitmap.cpp">
@@ -69,6 +72,9 @@
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="pointBrush.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="triangleBrush.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
