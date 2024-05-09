@@ -48,16 +48,16 @@ void LineBrush::BrushMove( const Point source, const Point target )
 	}
 
 	int size = pDoc->getSize();
-	int div = 12;
-	float radius = size / 2.0;
-	float Ax, Ay;
-	glBegin( GL_POLYGON );
+	int angle = pDoc->getAngle();
+	float Ax, Ay, Bx, By;
+	Ax = target.x + size * cos(angle * PI / 180);
+	Ay = target.y + size * sin(angle * PI / 180);
+	Bx = target.x - size * cos(angle * PI / 180);
+	By = target.y - size * sin(angle * PI / 180);
+	glBegin(GL_LINES);
 	SetColor( source );
-	for (int i = 0; i < div; i++) {
-		Ax = target.x + radius * cos(2 * PI * i / div);
-		Ay = target.y + radius * sin(2 * PI * i / div);
-		glVertex2f(Ax, Ay);
-	}
+	glVertex2f( Ax, Ay );
+	glVertex2f( Bx, By );
 	glEnd();
 }
 

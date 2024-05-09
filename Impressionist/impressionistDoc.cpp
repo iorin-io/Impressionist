@@ -24,10 +24,10 @@
 
 #define DESTROY(p)	{  if ((p)!=NULL) {delete [] p; p=NULL; } }
 
-ImpressionistDoc::ImpressionistDoc() 
+ImpressionistDoc::ImpressionistDoc()
 {
-	// Set NULL image name as init. 
-	m_imageName[0]	='\0';	
+	// Set NULL image name as init.
+	m_imageName[0]	='\0';
 
 	m_nWidth		= -1;
 	m_ucBitmap		= NULL;
@@ -266,3 +266,6 @@ int ImpressionistDoc::copyImageToCanvas() {
      return 0;
 }
 
+int ImpressionistDoc::getAngle() {
+	 return m_pUI->getAngle();
+}

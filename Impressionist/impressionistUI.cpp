@@ -16,17 +16,17 @@
 
 /*
 //------------------------------ Widget Examples -------------------------------------------------
-Here is some example code for all of the widgets that you may need to add to the 
-project.  You can copy and paste these into your code and then change them to 
-make them look how you want.  Descriptions for all of the widgets here can be found 
+Here is some example code for all of the widgets that you may need to add to the
+project.  You can copy and paste these into your code and then change them to
+make them look how you want.  Descriptions for all of the widgets here can be found
 in links on the fltk help session page.
 
 //---------Window/Dialog and Menubar-----------------------------------
-	
+
 	//----To install a window--------------------------
 	Fl_Window* myWindow = new Fl_Window(600, 300, "MyWindow");
 		myWindow->user_data((void*)(this));	// record self to be used by static callback functions
-		
+
 		// install menu bar
 		myMenubar = new Fl_Menu_Bar(0, 0, 600, 25);
 		Fl_Menu_Item ImpressionistUI::myMenuItems[] = {
@@ -50,8 +50,8 @@ in links on the fltk help session page.
 
 	//----The window callback--------------------------
 	// One of the callbacks
-	void ImpressionistUI::cb_load(Fl_Menu_* o, void* v) 
-	{	
+	void ImpressionistUI::cb_load(Fl_Menu_* o, void* v)
+	{
 		ImpressionistDoc *pDoc=whoami(o)->getDocument();
 
 		char* newfile = fl_file_chooser("Open File?", "*.bmp", pDoc->getImageName() );
@@ -81,10 +81,10 @@ in links on the fltk help session page.
 	{
 		((ImpressionistUI*)(o->user_data()))->m_nMyValue=int( ((Fl_Slider *)o)->value() ) ;
 	}
-	
+
 
 //------------Choice---------------------------------------
-	
+
 	//----To install a choice--------------------------
 	Fl_Choice * myChoice = new Fl_Choice(50,10,150,25,"&myChoiceLabel");
 	myChoice->user_data((void*)(this));	 // record self to be used by static callback functions
@@ -96,7 +96,7 @@ in links on the fltk help session page.
 	};
 	myChoice->menu(myChoiceMenu);
 	myChoice->callback(cb_myChoice);
-	
+
 	//-----The choice callback-------------------------
 	void ImpressionistUI::cb_myChoice(Fl_Widget* o, void* v)
 	{
@@ -126,7 +126,7 @@ in links on the fltk help session page.
 
 
 //---------Light Button------------------------------------
-	
+
 	//---To install a light button---------------------
 	Fl_Light_Button* myLightButton = new Fl_Light_Button(240,10,150,25,"&myLightButtonLabel");
 	myLightButton->user_data((void*)(this));   // record self to be used by static callback functions
@@ -163,7 +163,7 @@ in links on the fltk help session page.
 // This returns the UI, given the menu item.  It provides a
 // link from the menu items to the UI
 //------------------------------------------------------------
-ImpressionistUI* ImpressionistUI::whoami(Fl_Menu_* o)	
+ImpressionistUI* ImpressionistUI::whoami(Fl_Menu_* o)
 {
 	return ( (ImpressionistUI*)(o->parent()->user_data()) );
 }
@@ -175,7 +175,7 @@ ImpressionistUI* ImpressionistUI::whoami(Fl_Menu_* o)
 // Brings up a file chooser and then loads the chosen image
 // This is called by the UI when the load image menu item is chosen
 //------------------------------------------------------------------
-void ImpressionistUI::cb_load_image(Fl_Menu_* o, void* v) 
+void ImpressionistUI::cb_load_image(Fl_Menu_* o, void* v)
 {
 	ImpressionistDoc *pDoc=whoami(o)->getDocument();
 
@@ -190,7 +190,7 @@ void ImpressionistUI::cb_load_image(Fl_Menu_* o, void* v)
 // Brings up a file chooser and then saves the painted image
 // This is called by the UI when the save image menu item is chosen
 //------------------------------------------------------------------
-void ImpressionistUI::cb_save_image(Fl_Menu_* o, void* v) 
+void ImpressionistUI::cb_save_image(Fl_Menu_* o, void* v)
 {
 	ImpressionistDoc *pDoc=whoami(o)->getDocument();
 
@@ -205,7 +205,7 @@ void ImpressionistUI::cb_save_image(Fl_Menu_* o, void* v)
 // This is called by the UI when the brushes menu item
 // is chosen
 //-------------------------------------------------------------
-void ImpressionistUI::cb_brushes(Fl_Menu_* o, void* v) 
+void ImpressionistUI::cb_brushes(Fl_Menu_* o, void* v)
 {
 	whoami(o)->m_brushDialog->show();
 }
@@ -226,7 +226,7 @@ void ImpressionistUI::cb_clear_canvas(Fl_Menu_* o, void* v)
 // Causes the Impressionist program to exit
 // Called by the UI when the quit menu item is chosen
 //------------------------------------------------------------
-void ImpressionistUI::cb_exit(Fl_Menu_* o, void* v) 
+void ImpressionistUI::cb_exit(Fl_Menu_* o, void* v)
 {
 	whoami(o)->m_mainWindow->hide();
 	whoami(o)->m_brushDialog->hide();
@@ -239,15 +239,15 @@ void ImpressionistUI::cb_exit(Fl_Menu_* o, void* v)
 // Brings up an about dialog box
 // Called by the UI when the about menu item is chosen
 //-----------------------------------------------------------
-void ImpressionistUI::cb_about(Fl_Menu_* o, void* v) 
+void ImpressionistUI::cb_about(Fl_Menu_* o, void* v)
 {
 	fl_message("Impressionist FLTK version 1.1.4 for CS 384G, Fall 2005");
 }
 
 //------- UI should keep track of the current for all the controls for answering the query from Doc ---------
 //-------------------------------------------------------------
-// Sets the type of brush to use to the one chosen in the brush 
-// choice.  
+// Sets the type of brush to use to the one chosen in the brush
+// choice.
 // Called by the UI when a brush is chosen in the brush choice
 //-------------------------------------------------------------
 void ImpressionistUI::cb_brushChoice(Fl_Widget* o, void* v)
@@ -306,7 +306,7 @@ void ImpressionistUI::show() {
 }
 
 //------------------------------------------------
-// Change the paint and original window sizes to 
+// Change the paint and original window sizes to
 // w by h
 //------------------------------------------------
 void ImpressionistUI::resize_windows(int w, int h) {
@@ -314,9 +314,9 @@ void ImpressionistUI::resize_windows(int w, int h) {
 	m_origView->size(w,h);
 }
 
-//------------------------------------------------ 
-// Set the ImpressionistDoc used by the UI to 
-// communicate with the brushes 
+//------------------------------------------------
+// Set the ImpressionistDoc used by the UI to
+// communicate with the brushes
 //------------------------------------------------
 void ImpressionistUI::setDocument(ImpressionistDoc* doc)
 {
@@ -352,7 +352,7 @@ void ImpressionistUI::setSize( int size )
 {
 	m_nSize=size;
 
-	if (size<=40) 
+	if (size<=40)
 		m_BrushSizeSlider->value(m_nSize);
 }
 
@@ -362,7 +362,7 @@ void ImpressionistUI::setSize( int size )
 
 // Main menu definition
 Fl_Menu_Item ImpressionistUI::menuitems[] = {
-	
+
 	{ "&File",		0, 0, 0, FL_SUBMENU },
 	{ "&Load Image...",	FL_ALT + 'l', (Fl_Callback *)ImpressionistUI::cb_load_image },
 	{ "&Save Image...",	FL_ALT + 's', (Fl_Callback *)ImpressionistUI::cb_save_image },
@@ -370,7 +370,7 @@ Fl_Menu_Item ImpressionistUI::menuitems[] = {
 	{ "&Copy Original Image to Canvas", FL_CTRL + 'v', (Fl_Callback *)ImpressionistUI::cb_copy_image_to_canvas },
 	{ "&Clear Canvas", FL_ALT + 'c', (Fl_Callback *)ImpressionistUI::cb_clear_canvas, 0, FL_MENU_DIVIDER },
 	//Filter Kernel���K
-	
+
 	{ "&Quit",			FL_ALT + 'q', (Fl_Callback *)ImpressionistUI::cb_exit },
 	{ 0 },
 
@@ -425,7 +425,7 @@ ImpressionistUI::ImpressionistUI() {
 	//FilterKernel
 	fltDesignUI = new FltDesignUI;
 	fltDesignUI->impUI = this;
-	
+
 	for (int i=0;i<FLT_HEIGHT*FLT_WIDTH;i++)
 	{
 		fltKernel[i] = 0;  //�z��  fltKernel []
@@ -452,7 +452,7 @@ ImpressionistUI::ImpressionistUI() {
 		m_ClearCanvasButton->callback(cb_clear_canvas_button);
 
 
-		// Add brush size slider to the dialog 
+		// Add brush size slider to the dialog
 		m_BrushSizeSlider = new Fl_Value_Slider(10, 80, 300, 20, "Size");
 		m_BrushSizeSlider->user_data((void*)(this));	// record self to be used by static callback functions
 		m_BrushSizeSlider->type(FL_HOR_NICE_SLIDER);
@@ -471,8 +471,21 @@ ImpressionistUI::ImpressionistUI() {
 
 		//���l�X���C�_�[
 
+		m_nAngle=0;
+		m_BrushAngleSlider = new Fl_Value_Slider(10, 120, 300, 20, "Angle");
+		m_BrushAngleSlider->user_data((void*)(this));
+		m_BrushAngleSlider->type(FL_HOR_NICE_SLIDER);
+		m_BrushAngleSlider->labelfont(FL_COURIER);
+		m_BrushAngleSlider->labelsize(12);
+		m_BrushAngleSlider->minimum(0);
+		m_BrushAngleSlider->maximum(360);
+		m_BrushAngleSlider->step(1);
+		m_BrushAngleSlider->value(m_nAngle);
+		m_BrushAngleSlider->align(FL_ALIGN_RIGHT);
+		m_BrushAngleSlider->callback(cb_angleSlides);
 
-		m_brushDialog->end();	
+
+		m_brushDialog->end();
 
 }
 
@@ -576,13 +589,13 @@ void ImpressionistUI::cancelFilter(void)
 	std::swap( m_pDoc->m_ucPainting, m_pDoc->m_ucPreviewBackup );
 	fltDesignUI->hide();
 	m_paintView->refresh();
-}	
+}
 
 void ImpressionistUI::applyFilter(void)
 {
-	m_pDoc->applyFilter(m_pDoc->m_ucPreviewBackup, 
+	m_pDoc->applyFilter(m_pDoc->m_ucPreviewBackup,
 		m_pDoc->m_nPaintWidth, m_pDoc->m_nPaintHeight,
-		m_pDoc->m_ucPainting, 
+		m_pDoc->m_ucPainting,
 		fltKernel,FLT_WIDTH,FLT_HEIGHT,scale,offset);
 	fltDesignUI->hide();
 	m_paintView->refresh();
@@ -590,12 +603,27 @@ void ImpressionistUI::applyFilter(void)
 
 void ImpressionistUI::previewFilter(void)
 {
-	m_pDoc->applyFilter(m_pDoc->m_ucPreviewBackup, 
+	m_pDoc->applyFilter(m_pDoc->m_ucPreviewBackup,
 		m_pDoc->m_nPaintWidth, m_pDoc->m_nPaintHeight,
-		m_pDoc->m_ucPainting, 
+		m_pDoc->m_ucPainting,
 		fltKernel,FLT_WIDTH,FLT_HEIGHT,scale,offset);
 	m_paintView->refresh();
 }
 
+void ImpressionistUI::cb_angleSlides(Fl_Widget* o, void* v)
+{
+	((ImpressionistUI*)(o->user_data()))->m_nAngle=int( ((Fl_Slider *)o)->value() ) ;
+}
 
+int ImpressionistUI::getAngle()
+{
+	return m_nAngle;
+}
 
+void ImpressionistUI::setAngle(int angle)
+{
+	m_nAngle=angle;
+
+	if (angle<=360)
+		m_BrushAngleSlider->value(m_nAngle);
+}

@@ -45,8 +45,8 @@ public:
 	Fl_Choice*			m_BrushTypeChoice;
 
 	Fl_Slider*			m_BrushSizeSlider;
-	//ÀK
-	//Šp“x‚Æƒ¿’l‚ÌƒXƒ‰ƒCƒ_[
+	//ï¿½ï¿½ï¿½K
+	//ï¿½pï¿½xï¿½Æƒï¿½ï¿½lï¿½ÌƒXï¿½ï¿½ï¿½Cï¿½_ï¿½[
 
 
 	Fl_Button*          m_ClearCanvasButton;
@@ -61,14 +61,16 @@ public:
 	// Interface to get attribute
 
 	int					getSize();
-	//ÀK
+	//ï¿½ï¿½ï¿½K
 
 
 
 	void				setSize(int size);
-	//ÀK
+	//ï¿½ï¿½ï¿½K
 
-	
+	Fl_Slider*			m_BrushAngleSlider;
+	int					getAngle();
+	void				setAngle(int angle);
 
 	// Callbacks for the image filter dialogue (different from
 	// the other callbacks because they aren't static)
@@ -85,8 +87,11 @@ private:
 
 	// All attributes here
 	int		m_nSize;
-	//ÀK
+	//ï¿½ï¿½ï¿½K
 
+	int    m_nAngle;
+
+	static void cb_angleSlides(Fl_Widget* o, void* v);
 
 	// These attributes are set by the filter kernel UI
 	double fltKernel[FLT_WIDTH*FLT_HEIGHT];		//the kernel of the image filter
@@ -112,11 +117,11 @@ private:
 	static void	cb_about(Fl_Menu_* o, void* v);
 	static void	cb_brushChoice(Fl_Widget* o, void* v);
 	static void	cb_clear_canvas_button(Fl_Widget* o, void* v);
-	static void cb_copy_image_to_canvas(Fl_Menu_* o, void* v);  //‚R‰ñ–ÚÀK@FilterKernel
+	static void cb_copy_image_to_canvas(Fl_Menu_* o, void* v);  //ï¿½Rï¿½ï¿½Úï¿½ï¿½Kï¿½@FilterKernel
 	static void	cb_sizeSlides(Fl_Widget* o, void* v);
 
-	//ÀK
-	//Šp“x‚Æƒ¿’lƒR[ƒ‹ƒoƒbƒN
+	//ï¿½ï¿½ï¿½K
+	//ï¿½pï¿½xï¿½Æƒï¿½ï¿½lï¿½Rï¿½[ï¿½ï¿½ï¿½oï¿½bï¿½N
 };
 
 #endif

@@ -24,7 +24,7 @@ public:
 
 
 	int     clearCanvas();                  // called by the UI to clear the drawing canvas
-	int copyImageToCanvas();//‚R‰ñ–ÚÀK@FilterKernel 
+	int copyImageToCanvas();//ï¿½Rï¿½ï¿½Úï¿½ï¿½Kï¿½@FilterKernel 
 
 	void applyFilter( const unsigned char* sourceBuffer, //The filter kernel
 		int srcBufferWidth, int srcBufferHeight,
@@ -35,18 +35,17 @@ public:
 
 	void	setBrushType(int type);			// called by the UI to set the brushType
 	int		getSize();						// get the UI size
-	//ÀK
+	//ï¿½ï¿½ï¿½K
 
 
 	// get the UI angle
 	void	setSize(int size);		// set the UI size
 
-	//ÀK
+	//ï¿½ï¿½ï¿½K
 
-
+	int		getAngle();
 
 	char*	getImageName();					// get the current image name
-	
 
 // Attributes
 public:
