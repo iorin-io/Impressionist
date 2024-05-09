@@ -1,4 +1,4 @@
-// 
+//
 // impressionistDoc.cpp
 //
 // It basically maintain the bitmap for answering the color query from the brush.
@@ -11,11 +11,12 @@
 
 #include "impressionistDoc.h"
 #include "impressionistUI.h"
+#include "triangleBrush.h"
 
 #include "impBrush.h"
 
 // Include individual brush headers here.
-//ƒuƒ‰ƒV’Ç‰Á
+//ï¿½uï¿½ï¿½ï¿½Vï¿½Ç‰ï¿½
 #include "pointBrush.h"
 
 
@@ -37,6 +38,7 @@ ImpressionistDoc::ImpressionistDoc()
 	ImpBrush::c_pBrushes	= new ImpBrush* [ImpBrush::c_nBrushCount];
 
 	ImpBrush::c_pBrushes[BRUSH_POINTS]	= new PointBrush( this, "Points" );
+	ImpBrush::c_pBrushes[BRUSH_TRIANGLES] = new TriangleBrush(this, "Triangles");
 	// Note: You should implement these 5 brushes.  They are set the same (PointBrush) for now
 
 	// make one of the brushes current
@@ -244,18 +246,18 @@ GLubyte* ImpressionistDoc::GetOriginalPixel( const Point p )
 
 
 
-//‚R‰ñ–ÚŽÀK@FilterKernel
+//ï¿½Rï¿½ï¿½ÚŽï¿½ï¿½Kï¿½@FilterKernel
 int ImpressionistDoc::copyImageToCanvas() {
      if ( m_ucPainting ) {
-          // ƒLƒƒƒ“ƒoƒX‚Ìƒoƒbƒtƒ@‚ðÄŠm•Û
+          // ï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½oï¿½Xï¿½Ìƒoï¿½bï¿½tï¿½@ï¿½ï¿½ï¿½ÄŠmï¿½ï¿½
           delete [] m_ucPainting;
           m_nPaintWidth = m_nWidth;
           m_nPaintHeight = m_nHeight;
           m_ucPainting = new unsigned char [m_nPaintWidth*m_nPaintHeight*3];
 
-          // ’l‚ðƒRƒs[
+          // ï¿½lï¿½ï¿½ï¿½Rï¿½sï¿½[
           memcpy( m_ucPainting, m_ucBitmap, m_nPaintWidth * m_nPaintHeight * 3 );
-          m_pUI->m_paintView->refresh();            // Ä•`‰æ
+          m_pUI->m_paintView->refresh();            // ï¿½Ä•`ï¿½ï¿½
      }
      return 0;
 }

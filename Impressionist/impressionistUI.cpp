@@ -283,7 +283,7 @@ void ImpressionistUI::cb_sizeSlides(Fl_Widget* o, void* v)
 	((ImpressionistUI*)(o->user_data()))->m_nSize=int( ((Fl_Slider *)o)->value() ) ;
 }
 
-//é¿èK
+//ÔøΩÔøΩÔøΩK
 
 
 //---------------------------------- per instance functions --------------------------------------
@@ -369,7 +369,7 @@ Fl_Menu_Item ImpressionistUI::menuitems[] = {
 	{ "&Brushes...",	FL_ALT + 'b', (Fl_Callback *)ImpressionistUI::cb_brushes },
 	{ "&Copy Original Image to Canvas", FL_CTRL + 'v', (Fl_Callback *)ImpressionistUI::cb_copy_image_to_canvas },
 	{ "&Clear Canvas", FL_ALT + 'c', (Fl_Callback *)ImpressionistUI::cb_clear_canvas, 0, FL_MENU_DIVIDER },
-	//Filter Kernelé¿èK
+	//Filter KernelÔøΩÔøΩÔøΩK
 	
 	{ "&Quit",			FL_ALT + 'q', (Fl_Callback *)ImpressionistUI::cb_exit },
 	{ 0 },
@@ -384,7 +384,8 @@ Fl_Menu_Item ImpressionistUI::menuitems[] = {
 // Brush choice menu definition
 Fl_Menu_Item ImpressionistUI::brushTypeMenu[NUM_BRUSH_TYPE+1] = {
   {"Points",			FL_ALT+'p', (Fl_Callback *)ImpressionistUI::cb_brushChoice, (void *)BRUSH_POINTS},
-  //ÉuÉâÉVí«â¡
+  {"Triangles",			FL_ALT+'t', (Fl_Callback *)ImpressionistUI::cb_brushChoice, (void *)BRUSH_TRIANGLES},
+  //ÔøΩuÔøΩÔøΩÔøΩVÔøΩ«âÔøΩ
   {0}
 };
 
@@ -425,7 +426,7 @@ ImpressionistUI::ImpressionistUI() {
 	
 	for (int i=0;i<FLT_HEIGHT*FLT_WIDTH;i++)
 	{
-		fltKernel[i] = 0;  //îzóÒ  fltKernel []
+		fltKernel[i] = 0;  //ÔøΩzÔøΩÔøΩ  fltKernel []
 	}
 	fltKernel[(FLT_HEIGHT/2)*FLT_WIDTH+(FLT_HEIGHT/2)]=1;
 	scale = 1;
@@ -433,7 +434,7 @@ ImpressionistUI::ImpressionistUI() {
 	initFltDesignUI();
 
 	m_nSize = 10;
-	//é¿èK
+	//ÔøΩÔøΩÔøΩK
 
 
 	// brush dialog definition
@@ -462,11 +463,11 @@ ImpressionistUI::ImpressionistUI() {
 		m_BrushSizeSlider->align(FL_ALIGN_RIGHT);
 		m_BrushSizeSlider->callback(cb_sizeSlides);
 
-		//é¿èK
-		//åXÇ´ÉXÉâÉCÉ_Å[
+		//ÔøΩÔøΩÔøΩK
+		//ÔøΩXÔøΩÔøΩÔøΩXÔøΩÔøΩÔøΩCÔøΩ_ÔøΩ[
 
 
-		//ÉøílÉXÉâÉCÉ_Å[
+		//ÔøΩÔøΩÔøΩlÔøΩXÔøΩÔøΩÔøΩCÔøΩ_ÔøΩ[
 
 
 		m_brushDialog->end();	
@@ -480,7 +481,7 @@ ImpressionistUI::~ImpressionistUI()
 
 
 
-//é¿èKÅ@FilterKernel
+//ÔøΩÔøΩÔøΩKÔøΩ@FilterKernel
 void ImpressionistUI::cb_copy_image_to_canvas(Fl_Menu_* o, void* v) {
      ImpressionistDoc* pDoc=whoami(o)->getDocument();
 
@@ -492,7 +493,7 @@ void ImpressionistUI::cb_copy_image_to_canvas(Fl_Menu_* o, void* v) {
 }
 
 
-//Filter Kernerlóp
+//Filter KernerlÔøΩp
 void ImpressionistUI::cb_filter_kernel(Fl_Menu_* o, void* v) 
 {
 	ImpressionistDoc* pDoc=whoami(o)->getDocument();
