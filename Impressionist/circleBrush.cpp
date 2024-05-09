@@ -9,6 +9,9 @@
 #include "impressionistUI.h"
 #include "circleBrush.h"
 
+#include <math.h>
+#define PI 3.1415
+
 extern float frand();
 
 CircleBrush::CircleBrush( ImpressionistDoc* pDoc, char* name ) :
