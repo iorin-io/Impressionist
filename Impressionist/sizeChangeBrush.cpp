@@ -9,6 +9,9 @@
 #include "impressionistUI.h"
 #include "sizeChangeBrush.h"
 
+#include <math.h>
+#define PI 3.1415
+
 extern float frand();
 
 SizeChangeBrush::SizeChangeBrush( ImpressionistDoc* pDoc, char* name ) :
@@ -22,7 +25,7 @@ void SizeChangeBrush::BrushBegin( const Point source, const Point target )
 	ImpressionistUI* dlg=pDoc->m_pUI;
 
 	int size = pDoc->getSize();
-	
+
 
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -44,24 +47,24 @@ void SizeChangeBrush::BrushMove( const Point source, const Point target )
 		return;
 	}
 
-	int size = pDoc->getSize();
-	int Ax, Ay, Bx, By, Cx, Cy;
+	int baseSize = pDoc->getSize();
+	int div = 12;
 
-	//�O�p�`�̊e���_�̍��W
-	Ax = target.x - (.5 * size);
-	Bx = target.x + (.5 * size);
-	Cx = target.x;
-	Ay = target.y - (.5 * size);
-	By = target.y - (.5 * size);
-	Cy = target.y + (.5 * size);
+	time += 0.1f;
 
-	//SetColorAlpha( source, alpha );
+	float waveSize = baseSize * (0.5f + 0.5f * sin(time));
+
+	float radius = waveSize / 2.0f;
+	float Ax, Ay;
+	glBegin( GL_POLYGON );
 	SetColor( source );
-	glBegin(GL_POLYGON);
-	glVertex2i(Ax, Ay);
-	glVertex2i(Bx, By);
-	glVertex2i(Cx, Cy);
+	for (int i = 0; i < div; i++) {
+		Ax = target.x + radius * cos(2 * PI * i / div);
+		Ay = target.y + radius * sin(2 * PI * i / div);
+		glVertex2f(Ax, Ay);
+	}
 	glEnd();
+
 }
 
 void SizeChangeBrush::BrushEnd( const Point source, const Point target )
