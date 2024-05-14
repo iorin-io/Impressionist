@@ -15,7 +15,7 @@
 extern float frand();
 
 SizeChangeBrush::SizeChangeBrush( ImpressionistDoc* pDoc, char* name ) :
-	ImpBrush(pDoc,name)
+	ImpBrush(pDoc,name), time(0.0f)
 {
 }
 
