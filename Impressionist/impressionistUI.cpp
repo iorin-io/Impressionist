@@ -389,6 +389,7 @@ Fl_Menu_Item ImpressionistUI::brushTypeMenu[NUM_BRUSH_TYPE+1] = {
   {"Lines",				FL_ALT+'l', (Fl_Callback *)ImpressionistUI::cb_brushChoice, (void *)BRUSH_LINES},
   {"Scattered Points",	FL_ALT+'s', (Fl_Callback *)ImpressionistUI::cb_brushChoice, (void *)BRUSH_SCATTERED_POINTS},
   {"Scattered Circles",	FL_ALT+'r', (Fl_Callback *)ImpressionistUI::cb_brushChoice, (void *)BRUSH_SCATTERED_CIRCLES},
+  {"Size Change",		FL_ALT+'z', (Fl_Callback *)ImpressionistUI::cb_brushChoice, (void *)BRUSH_SIZE_CHANGE},
   //�u���V�ǉ�
   {0}
 };
