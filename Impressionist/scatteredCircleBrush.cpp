@@ -40,22 +40,17 @@ void ScatteredCircleBrush::BrushMove(const Point source, const Point target)
 	ImpressionistDoc* pDoc = GetDocument();
 	ImpressionistUI* dlg = pDoc->m_pUI;
 
-	//�X���C�_�[��������
-
 	if (pDoc == NULL) {
 		printf("ScatteredCircleBrush::BrushMove  document is NULL\n");
 		return;
 	}
 
-	//SetColorAlpha( source, alpha );
-	//�_�C�A���O�̃X���C�_�[����u���V�̑傫�����擾
 	int size = pDoc->getSize();
 	int div = 12;
 	float radius = size / 2.0;
 	float Ax, Ay, Randx, Randy;
 	Point color;
 
-	//������GL_POLYGON�̏ꍇ�A�ʑ��p�`��`��
 	for (int i = 0; i < 10; i++) {
 		glBegin(GL_POLYGON);
 		Randx = target.x - size / 2 + rand() % size;
