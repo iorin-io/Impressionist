@@ -52,7 +52,7 @@ void SizeChangeBrush::BrushMove( const Point source, const Point target )
 
 	time += 0.1f;
 
-	float waveSize = baseSize * (0.5f + 0.5f * sin(time));
+	float waveSize = baseSize + (baseSize * 0.5f * sin(time));
 
 	float radius = waveSize / 2.0f;
 	float Ax, Ay;
