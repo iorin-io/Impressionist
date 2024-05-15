@@ -1,0 +1,74 @@
+@import: report
+@require: azmath/azmath
+@require: itemize
+@require: code-printer/code-printer
+@require: code-printer/code-syntax
+@require: code-printer/code-theme
+@require: image/image
+@require: latexcmds/latexcmds
+@require: fss/fss
+@require: fss/fonts
+@require: fss/style
+
+
+ClassReport.document {|課題1 Impressionist|} {|202210016 髙𣘺伊織|} '<
+    +section{課題1} <
+        +p{
+            使用した画像を以下に示す。
+        }
+        +centering{\include-image?*?:(60mm)(`Impressionist/images/sopo.jpg`);}
+        +section{Scattered Circle Brush} <
+            +p{
+                Scattered Circle Brush を用いて、画像を描画した結果を以下に示す。
+            }
+            +centering{\include-image?*?:(60mm)(`Impressionist/output/scatteredCircleBrush.jpg`);}
+            +p{
+                Scattered Circle Brushにおいて、円の中心は\inline-code(`target`);から\inline-code(`size`);の範囲内でランダムに選ばれる。
+                以下のように実装されている。
+            }
+            +code-printer ?:(
+                CodePrinter.make-config CodeSyntax.cpp CodeTheme.tokyo-night
+            )(`Randx = target.x - size / 2 + rand() % size;
+Randy = target.y - size / 2 + rand() % size;
+            `);
+            +p {
+                円の半径は\inline-code(`size`);の半分で指定される。また、円の色は\inline-code(`source`);の色をそのまま使用する。
+            }
+            +p{
+                円の個数はfor文の回数で指定されている。今回の実装では10個となっている。
+            }
+            +code-printer ?:(
+                CodePrinter.make-config CodeSyntax.cpp CodeTheme.tokyo-night
+            )(`for (int i = 0; i < 10; i++) {`);
+
+        >
+        +section{自分独自に実装したオリジナルブラシ}<
+            +p{
+                今回は Size Change Brush を実装した。このブラシは、描画する円の大きさが変化していくブラシである。
+                円の大きさの変化は正弦波の変量をもとに実装している。
+            }
+            +p{
+                Size Change Brush を用いて、画像を描画した結果を以下に示す。
+            }
+            +centering{\include-image?*?:(60mm)(`Impressionist/output/sizeChangeBrush.jpg`);}
+            +p{
+                円の中心は\inline-code(`target`);であり、円の色は\inline-code(`source`);の色をそのまま使用する。
+                円の個数は、一度のブラシ移動（\inline-code(`BrushMove()`);）で1つ描画される。
+            }
+            +p{
+                円の大きさは、描画ごとに\inline-code(`time`);変数を0.1ずつ増やしていき、
+                \inline-code(`time`);変数に依存したサイン波の値を用いることで変化させている。
+                具体的には、以下のように実装されている。
+            }
+            +code-printer ?:(
+                CodePrinter.make-config CodeSyntax.cpp CodeTheme.tokyo-night
+            )(`time += 0.1f
+float waveSize = baseSize + (baseSize * 0.5f) * sin(time);
+float radius = waveSize / 2.0f;
+            `);
+        >
+    >
+    +section{課題3}<
+        
+    >
+>

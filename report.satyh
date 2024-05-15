@@ -1,0 +1,139 @@
+@require: class-template/class-template
+@require: code-printer/code-printer
+@require: code-printer/code-syntax
+@require: code-printer/code-theme
+@require: class-template/expand
+
+module ClassReport : sig
+
+  type position
+  val top : position
+  val here : position
+
+
+  type setting
+
+  val document : inline-text list -> inline-text list -> block-text -> document
+
+
+  direct +section : [string?; bool?; inline-text; block-text] block-cmd
+  direct +p : [inline-text] block-cmd
+
+  direct \footnote : [inline-text] inline-cmd
+
+  direct +figure : [string?; position?; inline-text; block-text] block-cmd
+  direct +table : [string?; position?; inline-text; block-text] block-cmd
+
+  direct \url : [string] inline-cmd
+
+  direct \ref : [string] inline-cmd
+  direct \ref-page : [string] inline-cmd
+
+  type bibitem
+  val bibitem : string ?-> string -> inline-text -> bibitem
+  direct +thebibliography : [bibitem list] block-cmd
+  direct \cite : [string list] inline-cmd
+
+
+  direct +kotaeawase : [block-text; block-text] block-cmd
+
+  direct +ocaml-code : [string] block-cmd
+  direct \ocaml-code : [string] inline-cmd
+  direct +ocaml-file : [string] block-cmd
+  direct \ocaml-file : [string] inline-cmd
+  direct \ocaml-inline : [string] inline-cmd
+
+end = struct
+
+  type position = ClassTemplate.position
+  let top = ClassTemplate.top
+  let here = ClassTemplate.here
+
+  type setting = ClassTemplate.setting
+
+  let set-setting c =
+    c
+    |> ClassTemplate.set-top-margin 25mm
+    |> ClassTemplate.set-bottom-margin 25mm
+    |> ClassTemplate.set-left-margin 20mm
+    |> ClassTemplate.set-right-margin 20mm
+    |> ClassTemplate.set-width-page 210mm
+    |> ClassTemplate.set-height-page 297mm
+    |> ClassTemplate.set-show-header false
+    |> ClassTemplateExpand.set-fonts-noto-regular
+
+  let default-setting =
+    ClassTemplate.default-setting
+    |> set-setting
+
+
+  let document titles authors inner =
+    ClassTemplate.document (
+      default-setting
+      |> ClassTemplate.set-title-multiline titles
+      |> ClassTemplate.set-author-multiline authors
+    ) inner
+
+
+  % class-templateから必要なコマンドをラップして再公開
+
+
+  let-block ctx +section ?:label-opt ?:is-omit-opt title inner =
+    match (label-opt, is-omit-opt) with
+    | (Some(label), Some(is-omit)) -> read-block ctx '<+ClassTemplate.section ?:(label) ?:(is-omit) (title) (inner);>
+    | (Some(label), None)          -> read-block ctx '<+ClassTemplate.section ?:(label) (title) (inner);>
+    | (None, Some(is-omit))        -> read-block ctx '<+ClassTemplate.section ?* ?:(is-omit) (title) (inner);>
+    | (None, None)                 -> read-block ctx '<+ClassTemplate.section (title) (inner);>
+
+  let-block +p it = '<+ClassTemplate.p(it);>
+
+
+
+  let-inline \footnote inner = {\ClassTemplate.footnote (inner);}
+
+  let-block ctx +figure ?:label-opt ?:pos-opt caption inner =
+    match (label-opt, pos-opt) with
+    | (Some(label), Some(pos)) -> read-block ctx '<+ClassTemplate.figure ?:(label) ?:(pos) (caption) (inner);>
+    | (Some(label), None)      -> read-block ctx '<+ClassTemplate.figure ?:(label) (caption) (inner);>
+    | (None, Some(pos))        -> read-block ctx '<+ClassTemplate.figure ?* ?:(pos) (caption) (inner);>
+    | (None, None)             -> read-block ctx '<+ClassTemplate.figure (caption) (inner);>
+
+  let-block ctx +table ?:label-opt ?:pos-opt caption inner =
+    match (label-opt, pos-opt) with
+    | (Some(label), Some(pos)) -> read-block ctx '<+ClassTemplate.table ?:(label) ?:(pos) (caption) (inner);>
+    | (Some(label), None)      -> read-block ctx '<+ClassTemplate.table ?:(label) (caption) (inner);>
+    | (None, Some(pos))        -> read-block ctx '<+ClassTemplate.table ?* ?:(pos) (caption) (inner);>
+    | (None, None)             -> read-block ctx '<+ClassTemplate.table (caption) (inner);>
+
+  let-inline \url url = {\ClassTemplate.url (url);}
+
+  let-inline \ref      label = {\ClassTemplate.ref      (label);}
+  let-inline \ref-page label = {\ClassTemplate.ref-page (label);}
+
+  type bibitem = ClassTemplate.bibitem
+  let bibitem = ClassTemplate.bibitem
+  let-block ctx +thebibliography lst = read-block ctx '<+ClassTemplate.thebibliography (lst);>
+  let-inline \cite lst = {\ClassTemplate.cite (lst);}
+
+
+  let-block +kotaeawase kaitou kaisetsu =
+    '<
+      +section ?* ?:(true) ({回答}) (kaitou);
+      +section ?* ?:(true) ({答え合わせ}) (kaitou);
+    >
+
+  let theme = CodeTheme.iceberg-light
+  let syntax = CodeSyntax.ocaml
+  let code-config = CodePrinter.make-config syntax theme
+
+  let-block ctx +ocaml-code code =
+    read-block ctx '<+code-printer ?:(code-config) (code);>
+  let-inline \ocaml-code code = {\code-printer ?:(code-config) (code);}
+
+  let-block ctx +ocaml-file file =
+    read-block ctx '<+file-printer ?:(code-config) (file);>
+  let-inline \ocaml-file file = {\file-printer ?:(code-config) (file);}
+
+  let-inline \ocaml-inline code = {\inline-code ?:(code-config) (code);}
+
+end
